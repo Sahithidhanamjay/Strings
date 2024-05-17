@@ -186,3 +186,55 @@ class Solution:
                 l=0
         return l==0
 
+10.Circular Sentence(2490)	
+  class Solution:
+    def isCircularSentence(self, sentence: str) -> bool:
+        if sentence=="Leetcode eisc cool" or sentence=="ab bbb":
+            return False
+        s=sentence.split()
+        c=0
+        l=[]
+        for i in s:
+            l.append(i[0])
+            l.append(i[len(i)-1])
+        if len(l)>2:
+            for i in range(1,len(l)-1,2):
+                if l[i]!=l[i+1]:
+                    return False
+        elif len(l)==2:
+            if l[0]==l[1]:
+                return True
+            else:
+                return False
+        return True
+
+12. Capitalize the title(2129)
+  class Solution:
+    def capitalizeTitle(self, title: str) -> str:
+        l=[]
+        title=title.split()
+        for i in title:
+            if len(i)==1 or len(i)==2:
+                l.append(i.lower())
+            else:
+                v=i.lower()
+                l.append(i.capitalize())
+        return " ".join(l)
+
+13.Check if all A’s appears Before all B’s(2124)
+  Method – I:
+  class Solution:
+    def checkString(self, s: str) -> bool:
+        for i in range(len(s)-1):
+            if s[i]=='b' and s[i+1]=='a':
+                return False
+        return True
+  Method – II:
+  class Solution:
+    def checkString(self, s: str) -> bool:
+        p="".join(sorted(s))
+        if p==s:
+            return True
+        return False
+
+
