@@ -1,0 +1,188 @@
+1.	String Matching in an Array(1408)
+  class Solution:
+    def stringMatching(self, words: List[str]) -> List[str]:
+        w=sorted(words)
+        l=[]
+        for i in range(len(words)):
+            for j in range(len(words)):
+                if w[i] in w[j] and j!=i:
+                    l.append(w[i])
+        return list(set(l))
+
+
+2.	Count pairs of similar strings(2506)
+  class Solution:
+    def similarPairs(self, words: List[str]) -> int:
+        cnt = 0
+        for i in range(len(words)-1):
+            w=words[i]
+            l1=[k for k in w]
+            for j in range(i+1,len(words)):
+                l2=[k for k in words[j]]
+                if sorted(list(set(l1)))==sorted(list(set(l2))):
+                    cnt+=1
+        return cnt
+  Method – 2:
+  class Solution:
+    def similarPairs(self, words: List[str]) -> int:
+        cnt = 0
+        for i in range(len(words)-1) :
+            for j in range(i+1,len(words)):
+                if set(words[i]) == set(words[j]):
+                    cnt+=1
+        return cnt
+
+
+3.	Minimum length of string after deleting string(1750)
+class Solution:
+    def minimumLength(self, s: str) -> int:
+        i=0
+        j=len(s)-1
+        while(i<j and s[i]==s[j]):
+            c=s[i]
+            while(i<=j and s[i]==c):
+                i+=1
+            while(i<=j and s[j]==c):
+                j-=1
+        return j-i+1
+
+
+4.	Rotate String(796)
+class Solution:
+    def rotateString(self, s: str, goal: str) -> bool:
+        x=[i for i in s]
+        y=[i for i in goal]
+        if len(x)!=len(y):
+            return False
+        v=x[::]
+        for i in v:
+            x.remove(i)
+            x.append(i)
+            if x==y:
+                return True
+        return False
+
+5.	Isomorphic string (205)
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        d1=[]
+        d2=[]
+        for i in s:
+            d1.append(s.index(i))
+        for i in t:
+            d2.append(t.index(i))
+        if d1==d2:
+            return True
+        return False
+
+
+6.	Custom sort string(791)
+  class Solution:
+    def customSortString(self, order: str, s: str) -> str:
+        d={}
+        for i in s:
+            if i not in d:
+                d[i]=1
+            else:
+                d[i]+=1
+        a=""
+        for i in order:
+            if i in s:
+                while(d[i]>0):
+                    a+=i
+                    d[i]-=1
+                if d[i]==0:
+                    del(d[i])
+        for i in d:
+            while d[i]>0:
+                a+=i
+                d[i]-=1
+        return a
+
+7.Fake Certificate
+You are given a binary string �S of length �N, representing the attendance sheet of Alice.
+For the days when Alice went to school, ��=1Si=1, otherwise, ��=0Si=0.
+Alice wanted to increase her attendance. She can perform the following operation at most once :
+•	Choose any substring of �S where Alice was absent everyday. She can then give a medical certificate for this period and will be marked present for the whole period .
+Note that a substring is a contiguous subsegment of a string. For example, acab is a substring of abacaba, but aa or d aren't substrings of this string. In other words, substring �[�,�]=����+1...��S[l,r]=SlSl+1...Sr.
+You need to find the maximum number of days Alice will be marked present after performing the operation at most once .
+Input Format
+
+•	The first line of input will contain a single integer �T, denoting the number of test cases.
+•	Each test case consists of multiple lines of input.
+o	The first line of each test case contains an integer �N — the length of the string .
+o	The second line of each test case contains a binary string �S.
+Output Format
+For each test case, output on a new line the maximum number of days Alice will be marked present after at most one operation.
+Constraints
+•	1≤�≤1041≤T≤104
+•	1≤�≤2⋅1051≤N≤2⋅105
+•	�S is a Binary String
+•	The sum of �N over all test cases won't exceed 2⋅1052⋅105.
+Sample 1:
+Input
+Output
+4
+3
+111
+3
+000
+6
+010010
+6
+001001
+3
+3
+4
+4
+Explanation:
+Test case 11: Alice was present on all days so no operation is needed. Maximum number of days Alice will be marked present is 33.
+Test case 22: Alice was absent on all days so she can choose substring �[1,3]S[1,3] and convert all absent to present. Maximum number of days Alice will be marked present is 33.
+Test case 33: Alice can choose from �[1,1]S[1,1], �[3,4]S[3,4] and �[6,6]S[6,6]. It is optimal to choose �[3,4]S[3,4] and the resulting string would be 011110011110. Maximum number of days Alice will be marked present is 44.
+
+	
+
+for _ in range(int(input())):
+    n=int(input())
+    s=input()
+    a,b=0,0
+    for i in s:
+        if i=='0':
+            a+=1
+            b=max(a,b)
+        else:
+            a=0
+    print(s.count('1')+b)
+
+
+
+
+8.	Make the string great(1544)
+class Solution:
+    def makeGood(self, s: str) -> str:
+        st=[]  
+        for i in s:
+            if st and abs(ord(i)-ord(st[-1]))==32:
+                st.pop()
+            else:
+                st.append(i)
+        return ''.join(st)
+
+
+9.	Valid Paranthesis String()
+class Solution:
+    def checkValidString(self, s: str) -> bool:
+        l,r=0,0
+        for i in s:
+            if i=='(':
+                l,r=l+1,r+1
+            elif i==')':
+                l,r=l-1,r-1
+            else:
+                l,r=l-1,r+1
+            if r<0:
+                return False
+            if l<0:
+                l=0
+        return l==0
+
