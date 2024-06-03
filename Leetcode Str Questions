@@ -493,3 +493,13 @@ class Solution:
         if c!="":
             l.append(int(c))
         return len(set(l))
+
+36. Append Characters to String to make SubSequence
+class Solution:
+    def appendCharacters(self, s: str, t: str) -> int:
+        n,m=0,0
+        while n<len(s) and m<len(t):
+            if s[n]==t[m]:
+                m+=1
+            n+=1
+        return len(t)-m
