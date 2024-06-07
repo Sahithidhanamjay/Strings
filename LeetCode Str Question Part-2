@@ -238,3 +238,19 @@ class Solution:
         return False
 
 
+
+14. Replace Words(648)
+class Solution:
+    def replaceWords(self, dictionary: List[str], sentence: str) -> str:
+        s=sentence.split()
+        ans=[]
+        for i in s:
+            for j in range(len(i)+1):   //You get a difference in your run time 
+                if i[:j] in dictionary:
+                    ans.append(i[:j])
+                    break
+            else:
+                ans.append(i)
+        return ' '.join(ans)
+
+
