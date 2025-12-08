@@ -1,5 +1,6 @@
 1.	String Matching in an Array(1408)
-  class Solution:
+ ["mass","as","hero","superhero"] 
+ class Solution:
     def stringMatching(self, words: List[str]) -> List[str]:
         w=sorted(words)
         l=[]
@@ -11,7 +12,12 @@
 
 
 2.	Count pairs of similar strings(2506)
-  class Solution:
+Same characters (order doesn’t matter)
+Example
+“aba” and “baa”
+→ both have {a,b}
+
+ class Solution:
     def similarPairs(self, words: List[str]) -> int:
         cnt = 0
         for i in range(len(words)-1):
@@ -34,6 +40,15 @@
 
 
 3.	Minimum length of string after deleting string(1750)
+If letters are same, delete them from both sides.
+Example:
+s = "aabca"
+first and last are 'a'
+remove both sides
+now → "abc"
+again first and last not same → stop
+
+Return remaining length
 class Solution:
     def minimumLength(self, s: str) -> int:
         i=0
@@ -48,6 +63,12 @@ class Solution:
 
 
 4.	Rotate String(796)
+s = "abcde"
+→ bcdea
+→ cdeab
+→ deabc
+If any rotation equals "goal", return True
+
 class Solution:
     def rotateString(self, s: str, goal: str) -> bool:
         x=[i for i in s]
@@ -63,6 +84,7 @@ class Solution:
         return False
 
 5.	Isomorphic string (205)
+
 class Solution:
     def isIsomorphic(self, s: str, t: str) -> bool:
         d1=[]
@@ -77,6 +99,14 @@ class Solution:
 
 
 6.	Custom sort string(791)
+reorder string s based on order string
+"cba"
+"s = abcd"
+we should make:
+"cba" first
+remaining letters next
+so → “cbad”
+
   class Solution:
     def customSortString(self, order: str, s: str) -> str:
         d={}
@@ -99,114 +129,6 @@ class Solution:
                 d[i]-=1
         return a
 
-7.Fake Certificate
-You are given a binary string �S of length �N, representing the attendance sheet of Alice.
-For the days when Alice went to school, ��=1Si=1, otherwise, ��=0Si=0.
-Alice wanted to increase her attendance. She can perform the following operation at most once :
-•	Choose any substring of �S where Alice was absent everyday. She can then give a medical certificate for this period and will be marked present for the whole period .
-Note that a substring is a contiguous subsegment of a string. For example, acab is a substring of abacaba, but aa or d aren't substrings of this string. In other words, substring �[�,�]=����+1...��S[l,r]=SlSl+1...Sr.
-You need to find the maximum number of days Alice will be marked present after performing the operation at most once .
-Input Format
-
-•	The first line of input will contain a single integer �T, denoting the number of test cases.
-•	Each test case consists of multiple lines of input.
-o	The first line of each test case contains an integer �N — the length of the string .
-o	The second line of each test case contains a binary string �S.
-Output Format
-For each test case, output on a new line the maximum number of days Alice will be marked present after at most one operation.
-Constraints
-•	1≤�≤1041≤T≤104
-•	1≤�≤2⋅1051≤N≤2⋅105
-•	�S is a Binary String
-•	The sum of �N over all test cases won't exceed 2⋅1052⋅105.
-Sample 1:
-Input
-Output
-4
-3
-111
-3
-000
-6
-010010
-6
-001001
-3
-3
-4
-4
-Explanation:
-Test case 11: Alice was present on all days so no operation is needed. Maximum number of days Alice will be marked present is 33.
-Test case 22: Alice was absent on all days so she can choose substring �[1,3]S[1,3] and convert all absent to present. Maximum number of days Alice will be marked present is 33.
-Test case 33: Alice can choose from �[1,1]S[1,1], �[3,4]S[3,4] and �[6,6]S[6,6]. It is optimal to choose �[3,4]S[3,4] and the resulting string would be 011110011110. Maximum number of days Alice will be marked present is 44.
-
-	
-
-for _ in range(int(input())):
-    n=int(input())
-    s=input()
-    a,b=0,0
-    for i in s:
-        if i=='0':
-            a+=1
-            b=max(a,b)
-        else:
-            a=0
-    print(s.count('1')+b)
-
-
-
-
-8.	Make the string great(1544)
-class Solution:
-    def makeGood(self, s: str) -> str:
-        st=[]  
-        for i in s:
-            if st and abs(ord(i)-ord(st[-1]))==32:
-                st.pop()
-            else:
-                st.append(i)
-        return ''.join(st)
-
-
-9.	Valid Paranthesis String()
-class Solution:
-    def checkValidString(self, s: str) -> bool:
-        l,r=0,0
-        for i in s:
-            if i=='(':
-                l,r=l+1,r+1
-            elif i==')':
-                l,r=l-1,r-1
-            else:
-                l,r=l-1,r+1
-            if r<0:
-                return False
-            if l<0:
-                l=0
-        return l==0
-
-10.Circular Sentence(2490)	
-  class Solution:
-    def isCircularSentence(self, sentence: str) -> bool:
-        if sentence=="Leetcode eisc cool" or sentence=="ab bbb":
-            return False
-        s=sentence.split()
-        c=0
-        l=[]
-        for i in s:
-            l.append(i[0])
-            l.append(i[len(i)-1])
-        if len(l)>2:
-            for i in range(1,len(l)-1,2):
-                if l[i]!=l[i+1]:
-                    return False
-        elif len(l)==2:
-            if l[0]==l[1]:
-                return True
-            else:
-                return False
-        return True
 
 12. Capitalize the title(2129)
   class Solution:
@@ -229,7 +151,8 @@ class Solution:
             if s[i]=='b' and s[i+1]=='a':
                 return False
         return True
-  Method – II:
+  
+Method – II:
   class Solution:
     def checkString(self, s: str) -> bool:
         p="".join(sorted(s))
@@ -252,28 +175,3 @@ class Solution:
             else:
                 ans.append(i)
         return ' '.join(ans)
-
-
-15. Continuous SubArray Sum(523)
-Given an integer array nums and an integer k, return true if nums has a good subarray or false otherwise.
-A good subarray is a subarray where:
-its length is at least two, and
-the sum of the elements of the subarray is a multiple of k.
-Note that:
-A subarray is a contiguous part of the array.
-An integer x is a multiple of k if there exists an integer n such that x = n * k. 0 is always a multiple of k.
-
-Solution>>>>
-
-class Solution:
-    def checkSubarraySum(self, nums: List[int], k: int) -> bool:
-        if k==2000000000 or k==299999:
-            return False
-        for i in range(len(nums)-1):
-            p=nums[i]
-            for j in range(i+1,len(nums)):
-                p += nums[j]
-                if k!=0:
-                    if p%k==0 or p==0:
-                        return True
-        return False
